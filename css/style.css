@@ -1,7 +1,171 @@
 @import url(reset.css);
+/*General*/
+html{ font-size: 62.5%;}
+body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: #000; color: #fff; }
+.heroesFixedWrapper{ position: fixed; width: 100%; }
+.scrollBox{ width: 100%; height: 10000px; }
+/*General*/
 
-body{
-    font-size: 62.5%;
-    font-family: 'Lato', sans-serif;
-    box-sizing: border-box;
+/*HeroFirst*/
+.heroFirst{
+    display: none;
+    width: 100%;
+    height: 100vh;
 }
+.heroFirst header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 10.4rem;
+}
+.heroFirst h1{
+    display: block;
+    width: 19.5rem;
+    height: 1.6rem;
+    margin-left: 10.4vw;
+    background: url(../assets/svg/Logo_White.svg)no-repeat;
+    text-indent: -999rem;
+}
+.heroFirst nav ul{
+    display: flex;
+    margin-right: 11vw;
+    justify-content: space-between;
+}
+
+.heroFirst nav ul li{
+    position: relative;
+    height: 20px;
+    margin-right: 2.5rem;
+}
+/*lenght li + legnht letter-spacing; center li*/
+.heroFirst nav ul li:first-child{ width: 10.5rem; left: 9px;} /* 8.7rem + 18px*/
+.heroFirst nav ul li:nth-child(2){ width: 10.9rem; left: 9px;} /* 9.1rem + 18px */
+.heroFirst nav ul li:nth-child(3){ width: 12.4rem; left: 11px;} /* 10.2rem + 22px*/
+.heroFirst nav ul li:nth-child(4){ width: 11.6rem; left: 10px;} /* 9.6rem + 20px*/
+.heroFirst nav ul li:last-child{ width: 10.6rem; left: 10px;} /* 8.6rem + 20px*/
+/*lenght li + legnht letter-spacing; center li*/
+
+.heroFirst nav li a{
+    position: absolute;
+    font-size: 1.6rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    transition: left 2s, letter-spacing 2s;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);;
+}
+/*center a*/
+.heroFirst nav ul li:first-child a{ left: 9px;}
+.heroFirst nav ul li:nth-child(2) a{ left: 9px;}
+.heroFirst nav ul li:nth-child(3) a{ left: 11px;}
+.heroFirst nav ul li:nth-child(4) a{ left: 10px;}
+.heroFirst nav ul li:last-child a{ left: 10px;}
+/*center a*/
+.heroFirst nav ul li a:hover{ left: 0px; letter-spacing: 2px;}
+
+.contentHeroFirst{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 10.4rem);
+    margin-left: 11%;
+    background: url(../assets/herobike_bg.jpg) 100% 100% no-repeat;
+    background-size: auto 100%;
+}
+
+.contentHeroFirst h3{
+    margin-bottom: 4.3rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.contentHeroFirst h2{
+    width: 44.8rem;
+    margin-bottom: 4.3rem;
+    font-size: 5.6rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 6.4rem;
+}
+
+.contentHeroFirst p{
+    width: 44.8rem;
+    margin-bottom: 5.3rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #fff;
+}
+
+.contentHeroFirst .buttonWrapper{
+    position: relative;
+    display: flex;
+    width: 40rem;
+}
+.contentHeroFirst .buttonWrapper button{
+    width: 19.2rem;
+    height: 4.8rem;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+}
+.buttonWrapper .firstButton{
+    order: -1;
+    border: 2px solid #fff;
+    background: rgba(0,0,0,0);
+    color: #000;
+    transition: color 1s 0.1s;
+}
+.buttonWrapper .firstButton::before{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 48px;
+    left: 189px;
+    width: 18.9rem;
+    height: 4.8rem;
+    background-color: #fff;
+    transform: rotate(180deg);
+    transform-origin: 0 0;
+    transition: all 1s;
+}
+.buttonWrapper .firstButton::after{
+    content: "";
+    position: absolute;
+    z-index: -3;
+    top: 0px;
+    left: 212px;
+    width: 0;
+    height: 4.8rem;
+    background-color: #fff;
+    transition: all 1s;
+}
+.buttonWrapper .secondButton{
+    margin-left: 1.9rem;
+    border: 2px solid #fff;
+    background: rgba(0,0,0,0);
+    color: #fff;
+    transition: color 1s 0.1s;
+}
+.buttonWrapper .secondButton:hover + .firstButton::before{width: 0;}
+.buttonWrapper .secondButton:hover + .firstButton::after{width: 18.8rem;}
+.buttonWrapper .secondButton:hover + .firstButton{color: #fff;}
+.buttonWrapper .secondButton:hover{color: #000;}
+/*HeroFirst*/
+
+/*HeroSecond*/
+.heroSecond{
+    width: 100%;
+    height: 100vh;
+    background: url(../assets/hero2_bg.jpg) 50% no-repeat;
+    background-size: cover;
+}
+
+
+
+
+
+/*HeroSecond*/
+
