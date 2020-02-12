@@ -8,7 +8,6 @@ body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: 
 
 /*HeroFirst*/
 .heroFirst{
-    display: none;
     width: 100%;
     height: 100vh;
 }
@@ -157,12 +156,54 @@ body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: 
 
 /*HeroSecond*/
 .heroSecond{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     width: 100%;
     height: 100vh;
     background: url(../assets/hero2_bg.jpg) 50% no-repeat;
     background-size: cover;
 }
 
+.heroSecond h3{
+    margin: 0 0 3.5% 11%;
+    margin-left: 11%;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+}
+
+.heroSecond h2{
+    margin: 0 0 4.5% 11%;
+    width: 35.2rem;
+    font-size: 3.2rem;
+    line-height: 4rem;
+}
+
+.heroSecond button{
+    position: relative;
+    width: 6rem;
+    margin: 0 0 3.5% 11%;
+    margin-left: 11%;
+    font-size: 1.6rem;
+    text-indent: 3rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.heroSecond button::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url(../assets/svg/arrow_white.svg)no-repeat;
+    transform: rotate(90deg);
+    cursor: pointer;
+}
 
 
 
