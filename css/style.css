@@ -4,13 +4,11 @@ html{ font-size: 62.5%;}
 body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: #000; color: #fff; }
 .heroesFixedWrapper{ position: fixed; width: 100%; }
 .scrollBox{ width: 100%; height: 10000px; }
+.hidden{visibility: hidden;}
 /*General*/
 
 /*HeroFirst*/
-.heroFirst{
-    width: 100%;
-    height: 100vh;
-}
+.heroFirst{width: 100%; height: 100vh;}
 .heroFirst header{
     display: flex;
     align-items: center;
@@ -64,6 +62,7 @@ body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: 
 .heroFirst nav ul li a:hover{ left: 0px; letter-spacing: 2px;}
 
 .contentHeroFirst{
+    visibility: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -82,13 +81,33 @@ body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: 
     text-transform: uppercase;
 }
 
-.contentHeroFirst h2{
+.contentHeroFirst .hWrapper{
+    position: relative;
+    width: 44.8rem;
+}
+
+.hWrapper h2{
     width: 44.8rem;
     margin-bottom: 4.3rem;
     font-size: 5.6rem;
     font-weight: 800;
     color: #fff;
     line-height: 6.4rem;
+}
+
+.hWrapper .hidderBox1, .hWrapper .hidderBox2{
+    position: absolute;
+    height: 5.8rem;
+    background-color: #000;
+    transform: rotate(180deg);
+    transform-origin: 0 0;
+}
+
+.hWrapper .hidderBox1{top:65px; left: 380px; width: 38rem;}
+.hWrapper .hidderBox2{bottom:-10px; left: 430px; width: 43rem;}
+
+.hidderBox2:hover{
+    transform: rotate(180deg) scaleX(0.1);
 }
 
 .contentHeroFirst p{
@@ -209,4 +228,3 @@ body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: 
 
 
 /*HeroSecond*/
-
