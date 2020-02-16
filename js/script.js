@@ -1,51 +1,35 @@
-const heroFirst = document.querySelector(".contentHeroFirst");
-const heroLogo = document.querySelector(".logo");
-const herolink = document.querySelectorAll(".link");
-const heroh2HidderBox1 = document.querySelectorAll(".hidderBox1");
-const heroh2HidderBox2 = document.querySelectorAll(".hidderBox2");
+function animationsHero1(){
+    const heroFirstMain = document.querySelector(".contentHeroFirst");
+    const heroLogo = document.querySelector(".logo");
+    const herolink = document.querySelectorAll(".link");
+    const heroh2HidderBox1 = document.querySelectorAll(".hidderBox1");
+    const heroh2HidderBox2 = document.querySelectorAll(".hidderBox2");
+    const heroh3 = document.querySelector(".heroFirstItem");
+    const heroParagraph = document.querySelector(".heroFirstItem3");
+    const firstButton = document.querySelector(".firstButton");
+    const secondButton = document.querySelector(".secondButton");
 
+    TweenMax.set(heroFirstMain, {visibility: "visible"});
+    TweenMax.set(heroLogo, {visibility: "visible"});
+    TweenMax.set(herolink, { visibility: "visible"});
+    TweenMax.set(heroh3, { visibility: "visible"});
+    TweenMax.set(heroParagraph, { visibility: "visible"});
+    TweenMax.set(firstButton, { visibility: "visible"});
+    TweenMax.set(secondButton, { visibility: "visible"});
 
+    const tl = new TimelineMax({delay : 0.4});
 
+    tl.from(heroFirstMain, 0.6, {opacity : 0})
+    .addLabel('showNav', 1)
+    .from(heroLogo, 0.6, { opacity : 0})
+    .staggerFrom(herolink, 0.4, { opacity : 0}, 0.2, 'showNav')
+    .to(heroh2HidderBox1, 0.8, {transform: "rotate(180deg) scaleX(0.01)"})
+    .to(heroh2HidderBox2, 1, {transform: "rotate(180deg) scaleX(0.01)"})
+    .addLabel("showParagraphandH3")
+    .addLabel('showbuttons')
+    .from(heroh3, 1.2, { opacity : 0}, "showParagraphandH3")
+    .from(heroParagraph, 1, { opacity : 0}, "showParagraphandH3")
+    .from(firstButton, 1, {opacity : 0, delay: .5}, 'showbuttons')
+    .from(secondButton, 1, {opacity : 0, delay: .5}, 'showbuttons');
+}
 
-
-
-
-
-TweenMax.set(heroFirst, {visibility: "visible"});
-TweenMax.set(heroLogo, {visibility: "visible"});
-TweenMax.set(herolink, { visibility: "visible"});
-
-const tl = new TimelineMax({delay : 0.4});
-
-
-tl.from(heroFirst, 0.6, {opacity : 0})
-.from(heroLogo, 0.6, { opacity : 0})
-.staggerFrom(herolink, 0.6, { opacity : 0}, 0.4)
-.to(heroh2HidderBox1, 0.6, {transform: "rotate(180deg) scaleX(0.01)"})
-.to(heroh2HidderBox2, 0.6, {transform: "rotate(180deg) scaleX(0.01)"});
-
-
-
-
-
-/*
-const heroFirst = document.querySelectorAll(".contentHeroFirst");
-const heroFirstLinks = document.querySelectorAll(".link");
-const heroFirstLogo = document.querySelector(".logo");
-const heroFirstItem1 = document.querySelector(".heroFirstItem1");
-const heroFirstItem2 = document.querySelector(".heroFirstItem2::before");
-const heroFirstItem3 = document.querySelector(".heroFirstItem3");
-const heroFirstButton1 = document.querySelector(".firstButton");
-const heroFirstButton2 = document.querySelector(".secondButton");
-
-
-TweenMax.set(heroFirstLogo, { visibility: "visibl" });
-tl.from(heroFirst, 0.6, {opacity : 0})
-tl.from(heroFirstLogo, 0.6, {opacity : 0})
-.staggerFrom(heroFirstLinks, 0.6, {opacity:0}, 0.4)
-tl.from(heroFirstItem1, 1, {opacity : 0})
-tl.from(heroFirstItem2, 1, {opacity : 0})
-tl.from(heroFirstItem3, 1, {opacity : 0})
-tl.from(heroFirstButton1, 1, {opacity : 0})
-tl.from(heroFirstButton2, 1, {opacity : 0})
-*/

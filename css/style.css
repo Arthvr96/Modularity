@@ -62,7 +62,6 @@ body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: 
 .heroFirst nav ul li a:hover{ left: 0px; letter-spacing: 2px;}
 
 .contentHeroFirst{
-    visibility: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -99,6 +98,7 @@ body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: 
     position: absolute;
     height: 5.8rem;
     background-color: #000;
+    animation-timing-function: ease-in-out;
     transform: rotate(180deg);
     transform-origin: 0 0;
 }
@@ -166,6 +166,7 @@ body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: 
     background: rgba(0,0,0,0);
     color: #fff;
     transition: color 1s 0.1s;
+    
 }
 .buttonWrapper .secondButton:hover + .firstButton::before{width: 0;}
 .buttonWrapper .secondButton:hover + .firstButton::after{width: 18.8rem;}
@@ -175,7 +176,7 @@ body{ font-family: 'Lato', sans-serif; box-sizing: border-box;background-color: 
 
 /*HeroSecond*/
 .heroSecond{
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
