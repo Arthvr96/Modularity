@@ -1,30 +1,60 @@
-animationsHero1();
-let test = true;
+let oldScrollPosition = 0;
 
-let last_known_scroll_position = 0;
-let ticking = false;
+setScrollPositionZero();
+animationsOnLoad();
+scrollFirst();
 
-x();
+function setScrollPositionZero(){
+  window.onload = function() {
+    setTimeout (function () {
+      scrollTo(0,0);
+    }, 0);
+}}
 
-function x(test){
-    function doSomething(scroll_pos) {
-        console.log("pozycja scroola = " + last_known_scroll_position);
-        window.removeEventListener('scroll',pokazgowno,false);
-      }
-      window.addEventListener('scroll', function(e) {
-        last_known_scroll_position = window.scrollY;
-        if (!ticking) {
-          window.requestAnimationFrame(function() {
-            doSomething(last_known_scroll_position);
-            ticking = false;
-          });
-          ticking = true;
-        }
-      });
+
+function transition1(){
+  animationsOutHero1();
+  animationsInHero2();
+  setTimeout(scrollSecond, 500);
 }
 
+function transition2(){
+  animationsOutHero2();
+  setTimeout(animationsInHero1, 800);
+  scrollTo(0,0);
+  setTimeout(scrollFirst,2050);
+}
 
+function scrollFirst(){
+  let ticking = true;
+  let scrollPosiction;
+  window.addEventListener('scroll', function scrollEvent(e){
+    oldScrollPosition = scrollPosiction;
+    scrollPosiction = window.scrollY;
+    if(ticking){
+      window.requestAnimationFrame(function(){
+         if(scrollPosiction>5){
+           transition1();
+           window.removeEventListener('scroll', scrollEvent);
+         }
+      });
+    }
+  });
+}
 
-function pokazgowno(){
-    alert("gowno");
+function scrollSecond(){
+  let ticking = true;
+  let scrollPosiction;
+  oldScrollPosition = window.scrollY - 5;
+  window.addEventListener('scroll', function scrollEvent(e){
+    scrollPosiction = window.scrollY;
+    if(ticking){
+      window.requestAnimationFrame(function(){
+         if(scrollPosiction<oldScrollPosition){
+           transition2();
+           window.removeEventListener('scroll', scrollEvent);
+         }
+      });
+    }
+  });
 }
