@@ -14,6 +14,7 @@ const secondButton = document.querySelector(".secondButton");
 const sectionSecond = document.querySelector(".heroSecond");
 const sectionSecondContent = document.querySelector(".heroSecondContent");
 
+const features = document.querySelector(".features");
 
 function animationsOnLoad(){
     TweenMax.set(heroFirstMain, {visibility: "visible"});
@@ -60,15 +61,31 @@ function animationsOutHero1(){
 
 function animationsInHero2(){
     const tl = new TimelineMax({delay:0.7});
-
     TweenMax.set(sectionSecond, {display: "block"});
-
     tl.fromTo(sectionSecondContent, 0.6, {transform: "translateY(50px)", opacity: 0},{transform: "translateY(0)", opacity: 1});
 }
 
 function animationsOutHero2(){
     const tl = new TimelineMax({delay:0});
-
     tl.fromTo(sectionSecondContent, 0.6, {transform: "translateY(0)", opacity: 1},{transform: "translateY(-50px)", opacity: 0})
     .set(sectionSecond, {display: "none"});
+}
+
+function animationsOutButton(){
+    const tl = new TimelineMax({delay:0});
+    tl.fromTo(sectionFirst, 0.5, {opacity: 1},{opacity:0})
+    .set(sectionFirst, {display:"none"})
+    .set(sectionSecond, {display: "block"})
+    .fromTo(sectionSecond, 0.5, {opacity: 0},{opacity: 1});
+}
+
+function animationsFeaturesIn(){
+    const tl = new TimelineMax();
+    tl.set(features, {display: "block"})
+    .addLabel("slide")
+    .fromTo(sectionSecond,3.5,{ease: "expo.out", transform: "translateY(0)"},{ease: "expo.out", transform: "translateY(-100vh)"},"slide")
+    .fromTo(features, 3.5, {ease: "expo.out", transform: "translateY(0)"},{ease: "expo.out", transform: "translateY(-100vh)"}, "slide")
+    .addLabel("translate")
+    .set(sectionSecond,{display: "none"},"translate")
+    .set(features, {transform: "translateY(0)"}, "translate");
 }

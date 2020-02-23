@@ -11,7 +11,6 @@ function setScrollPositionZero(){
     }, 0);
 }}
 
-
 function transition1(){
   animationsOutHero1();
   animationsInHero2();
@@ -57,4 +56,8 @@ function scrollSecond(){
       });
     }
   });
+}
+
+function goToFeatures(){
+  animationsFeaturesIn();
 }
