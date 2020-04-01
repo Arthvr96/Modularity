@@ -1,0 +1,7 @@
+{
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "react/jsx-max-props-per-line": [1, { "maximum": 3 }]
+  }
+}
