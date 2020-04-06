@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
+import Root from 'pages/Root/Root';
 
-const App = () => <h1>Hello World</h1>;
+const App = () => <Root />;
 
 export default App;
