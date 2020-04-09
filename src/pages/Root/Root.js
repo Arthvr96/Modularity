@@ -1,32 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
-
 import 'normalize.css';
 import GlobalStyles from 'themes/GlobalStyles';
 import { themeDark, themeLight } from 'themes/theme';
 import Header from 'templates/Header/Header';
-import Button from 'components/Button/Button';
+import Hero1 from 'templates/Hero1/Hero1';
 
-function Root() {
-  const [theme, setTheme] = useState('dark');
-  const toggleTheme = () => {
+class Root extends React.Component {
+  state = {
+    theme: 'dark',
+  };
+
+  toggleTheme = () => {
+    const { theme } = this.state;
     if (theme === 'dark') {
-      setTheme('light');
+      this.setState({ theme: 'light' });
     } else {
-      setTheme('dark');
+      this.setState({ theme: 'dark' });
     }
   };
 
-  return (
-    <ThemeProvider
-      theme={theme === 'dark' ? themeDark : themeLight}
-    >
-      <>
-        <GlobalStyles />
-        <Header />
-        <Button onClick={toggleTheme}>Test</Button>
-      </>
-    </ThemeProvider>
-  );
+  render() {
+    const { theme } = this.state;
+    return (
+      <ThemeProvider
+        theme={theme === 'dark' ? themeDark : themeLight}
+      >
+        <>
+          <GlobalStyles />
+          <Header triggerToggleTheme={this.toggleTheme} />
+          <Hero1 />
+        </>
+      </ThemeProvider>
+    );
+  }
 }
 export default Root;

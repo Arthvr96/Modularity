@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import NavigationWrapper from 'components/NavigationWrapper/NavigationWrapper';
 
 const ButtonHamburger = styled.button`
   display: inline-block;
@@ -11,6 +12,7 @@ const ButtonHamburger = styled.button`
 `;
 
 const HamburgerBox = styled.span`
+  z-index: 1000;
   width: 1.9rem;
   height: 1.2rem;
   display: inline-block;
@@ -18,7 +20,8 @@ const HamburgerBox = styled.span`
 `;
 
 const HamburgerInner = styled.span`
-  position: absolute;
+  z-index: 1000;
+  position: relative;
   display: block;
   width: 100%;
   height: 0.2rem;
@@ -32,13 +35,15 @@ const HamburgerInner = styled.span`
   &::before,
   &::after {
     content: '';
+    z-index: 1000;
     position: absolute;
     display: block;
     left: 0;
     width: 100%;
     height: 0.2rem;
     background-color: ${({ theme }) => theme.fgColor};
-    transition: transform 0.3s 0.1s ease-in;
+    transition: background-color 0.2s ease-in,
+      transform 0.3s 0.1s ease-in;
   }
 
   &::before {
@@ -65,30 +70,33 @@ const HamburgerInner = styled.span`
   }
 `;
 
-const Paragraph = styled.p`
-  color: black;
-`;
+class HamburgerMenu extends React.Component {
+  state = {
+    isOpen: 'false',
+  };
 
-function Hamburger() {
-  const [isOpen, setisOpen] = useState('false');
-  const toggleHamburger = () => {
+  toggleHamburger = () => {
+    const { isOpen } = this.state;
     if (isOpen === 'false') {
-      setisOpen('true');
+      this.setState({ isOpen: 'true' });
     } else {
-      setisOpen('false');
+      this.setState({ isOpen: 'false' });
     }
   };
 
-  return (
-    <>
-      <Paragraph>Test</Paragraph>
-      <ButtonHamburger onClick={toggleHamburger}>
-        <HamburgerBox>
-          <HamburgerInner isOpen={isOpen} />
-        </HamburgerBox>
-      </ButtonHamburger>
-    </>
-  );
+  render() {
+    const { isOpen } = this.state;
+    return (
+      <>
+        <ButtonHamburger onClick={this.toggleHamburger}>
+          <HamburgerBox>
+            <HamburgerInner isOpen={isOpen} />
+          </HamburgerBox>
+        </ButtonHamburger>
+        <NavigationWrapper isOpen={isOpen} />
+      </>
+    );
+  }
 }
 
-export default Hamburger;
+export default HamburgerMenu;
