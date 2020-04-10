@@ -4,7 +4,7 @@ import 'normalize.css';
 import GlobalStyles from 'themes/GlobalStyles';
 import { themeDark, themeLight } from 'themes/theme';
 import Header from 'templates/Header/Header';
-import Hero1 from 'templates/Hero1/Hero1';
+import HeroesSection from '../../templates/HeroesSection/HeroesSection';
 
 class Root extends React.Component {
   state = {
@@ -22,6 +22,7 @@ class Root extends React.Component {
 
   render() {
     const { theme } = this.state;
+
     return (
       <ThemeProvider
         theme={theme === 'dark' ? themeDark : themeLight}
@@ -29,7 +30,7 @@ class Root extends React.Component {
         <>
           <GlobalStyles />
           <Header triggerToggleTheme={this.toggleTheme} />
-          <Hero1 />
+          <HeroesSection />
         </>
       </ThemeProvider>
     );

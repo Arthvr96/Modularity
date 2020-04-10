@@ -4,13 +4,13 @@ import { navigationLinks } from 'utilites/navigationLinks';
 import NavigationItem from './NavigationItem/NavigationItem';
 
 const NavWrapper = styled.nav`
+  position: absolute;
+  z-index: 500;
+  right: 0;
+  top: 0;
   display: block;
   width: 100vw;
   height: ${global.window.innerHeight}px;
-  position: absolute;
-  z-index: 0;
-  right: 0;
-  top: 0;
   background: ${({ theme }) => theme.bgColor};
   transform: translateX(
     ${({ isOpen }) => (isOpen === 'true' ? '0' : '-100vw')}
@@ -18,21 +18,22 @@ const NavWrapper = styled.nav`
   transition: transform 1s 0.2s ease-in-out;
 
   ul {
-    margin: 0;
-    padding: 0;
+    z-index: 500;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: ${global.window.innerHeight}px;
+    margin: 0;
+    padding: 0;
   }
 
   li {
     width: 100vw;
+    margin-bottom: 2.4rem;
     text-align: center;
     list-style: none;
-    margin-bottom: 2.4rem;
   }
 
   li:last-child {

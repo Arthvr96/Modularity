@@ -5,40 +5,40 @@ import NavigationWrapper from 'components/NavigationWrapper/NavigationWrapper';
 const ButtonHamburger = styled.button`
   display: inline-block;
   padding: 1rem;
-  cursor: pointer;
-  background-color: transparent;
-  border: 0;
   margin: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
 `;
 
 const HamburgerBox = styled.span`
+  position: relative;
   z-index: 1000;
+  display: inline-block;
   width: 1.9rem;
   height: 1.2rem;
-  display: inline-block;
-  position: relative;
 `;
 
 const HamburgerInner = styled.span`
-  z-index: 1000;
   position: relative;
+  z-index: 1000;
   display: block;
   width: 100%;
   height: 0.2rem;
   left: 0;
   top: 50%;
-  transform: translateY(-50%);
   background-color: ${({ isOpen, theme }) =>
     isOpen === 'true' ? 'transparent' : theme.fgColor};
+  transform: translateY(-50%);
   transition: background-color 0.2s ease-in;
 
   &::before,
   &::after {
     content: '';
-    z-index: 1000;
     position: absolute;
-    display: block;
+    z-index: 1000;
     left: 0;
+    display: block;
     width: 100%;
     height: 0.2rem;
     background-color: ${({ theme }) => theme.fgColor};
