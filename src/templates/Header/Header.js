@@ -2,6 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import logo from 'assets/images/logo-darktheme.svg';
 import HamburgerMenu from 'components/HamburgerMenu/HamburgerMenu';
+import media from 'utilites/media';
+
+const ZindexWrapper = styled.div`
+  position: relative;
+  z-index: 500;
+`;
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -11,8 +17,7 @@ const HeaderWrapper = styled.header`
   width: 100vw;
   height: 5.6rem;
   background: ${({ theme }) => theme.bgColor};
-  transition: background-color 0.6s ease-in,
-    color 0.6s ease-in;
+  transition: background-color 0.6s ease-in, color 0.6s ease-in;
 `;
 
 const Logo = styled.h1`
@@ -24,6 +29,9 @@ const Logo = styled.h1`
   background: url(${logo});
   filter: invert(${({ theme }) => theme.filter});
   transition: filter 0.6s ease-in;
+  ${media.desktop`
+  margin-left:10vw;
+  `}
 `;
 
 const ToggleThemeButton = styled.div`
@@ -74,36 +82,45 @@ const ToggleThemeButton = styled.div`
   .slider.round .before {
     border-radius: 50%;
   }
+
+  ${media.desktop`
+  position: absolute;
+  right:5%;
+  top:50%;
+  transform: translateY(-50%);
+  `}
 `;
 
 const Header = ({ triggerToggleTheme }) => (
-  <HeaderWrapper>
-    <a href="index.html">
-      <Logo>Modularity</Logo>
-    </a>
-    <ToggleThemeButton>
-      <label htmlFor="inputName" className="switch">
-        <input id="inputName" type="checkbox" />
-        <span
-          role="button"
-          tabIndex={0}
-          onClick={triggerToggleTheme}
-          onKeyPress={triggerToggleTheme}
-          className="slider round"
-        >
+  <ZindexWrapper>
+    <HeaderWrapper>
+      <a href="index.html">
+        <Logo>Modularity</Logo>
+      </a>
+      <ToggleThemeButton>
+        <label htmlFor="inputName" className="switch">
+          <input id="inputName" type="checkbox" />
           <span
-            aria-label="Save"
             role="button"
             tabIndex={0}
             onClick={triggerToggleTheme}
             onKeyPress={triggerToggleTheme}
-            className="before"
-          />
-        </span>
-      </label>
-    </ToggleThemeButton>
-    <HamburgerMenu />
-  </HeaderWrapper>
+            className="slider round"
+          >
+            <span
+              aria-label="Save"
+              role="button"
+              tabIndex={0}
+              onClick={triggerToggleTheme}
+              onKeyPress={triggerToggleTheme}
+              className="before"
+            />
+          </span>
+        </label>
+      </ToggleThemeButton>
+      <HamburgerMenu />
+    </HeaderWrapper>
+  </ZindexWrapper>
 );
 
 export default Header;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from 'utilites/media';
 import NavigationWrapper from 'components/NavigationWrapper/NavigationWrapper';
 
 const ButtonHamburger = styled.button`
@@ -9,6 +10,9 @@ const ButtonHamburger = styled.button`
   border: 0;
   background-color: transparent;
   cursor: pointer;
+  ${media.desktop`
+  display:none;
+  `}
 `;
 
 const HamburgerBox = styled.span`
@@ -42,31 +46,19 @@ const HamburgerInner = styled.span`
     width: 100%;
     height: 0.2rem;
     background-color: ${({ theme }) => theme.fgColor};
-    transition: background-color 0.2s ease-in,
-      transform 0.3s 0.1s ease-in;
+    transition: background-color 0.2s ease-in, transform 0.3s 0.1s ease-in;
   }
 
   &::before {
     top: -5px;
-    transform: translateY(
-        ${({ isOpen }) => (isOpen === 'true' ? '5px' : '0')}
-      )
-      rotate(
-        ${({ isOpen }) =>
-          isOpen === 'true' ? '45deg' : '0'}
-      );
+    transform: translateY(${({ isOpen }) => (isOpen === 'true' ? '5px' : '0')})
+      rotate(${({ isOpen }) => (isOpen === 'true' ? '45deg' : '0')});
   }
 
   &::after {
     top: 5px;
-    transform: translateY(
-        ${({ isOpen }) =>
-          isOpen === 'true' ? '-5px' : '0'}
-      )
-      rotate(
-        ${({ isOpen }) =>
-          isOpen === 'true' ? '-45deg' : '0'}
-      );
+    transform: translateY(${({ isOpen }) => (isOpen === 'true' ? '-5px' : '0')})
+      rotate(${({ isOpen }) => (isOpen === 'true' ? '-45deg' : '0')});
   }
 `;
 
