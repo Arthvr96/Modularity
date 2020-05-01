@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import media from 'utilites/media';
 import { fonts, lineHight } from 'utilites/typography';
@@ -64,7 +64,10 @@ const SubTitle = styled.h4`
   color: ${({ theme }) => theme.fontColor};
   text-transform: uppercase;
   ${media.tablet`
-    margin-top:0
+    margin-top:0;
+  `}
+  ${media.desktop`
+    margin-bottom: 2.4rem;
   `}
 `;
 
@@ -74,6 +77,11 @@ const HeaderTitle = styled.h2`
   font-weight: ${fonts.Bolt};
   line-height: ${lineHight.mobileH1}rem;
   color: ${({ theme }) => theme.fontColor};
+  ${media.desktop`
+    font-size: 5.6rem;
+    line-height: ${lineHight.desktopH1}rem;
+    margin-bottom: 2.4rem;
+  `}
 `;
 
 const Paragraph = styled.p`
@@ -164,36 +172,34 @@ const ButtonCta = styled.button`
 
 const contentSubTtitle = 'Subtitle';
 const contentHeaderTitle = 'Our product is available for use';
-const contentParagraph =
-  "A project is a temporary endeavor designed to produce a unique product, service or result with a defined beginning and end undertaken to meet unique goals and objectives, typically to bring about beneficial change or added value. The object of project management is to produce a complete project which complies with the client's objectives.";
+const contentParagraph = `A project is a temporary endeavor designed to produce a unique product,
+  service or result with a defined beginning and end undertaken to meet unique goals and objectives,
+  typically to bring about beneficial change or added value. The object of project management is to produce a
+  complete project which complies with the client's objectives.`;
 
-const Hero1 = ({ triggerToggleHero }) => {
-  const [state, setState] = useState({
-    clicked: false,
-  });
-
+const Hero1 = ({ toggleHero, hideHero1 }) => {
   let hero1 = useRef(null);
 
-  useEffect(() => {
+  const hideHero = () => {
     const tl = gsap.timeline({
       defaults: { ease: 'power3.inOut' },
     });
-    if (state.clicked) {
-      tl.fromTo(
-        hero1,
-        { autoAlpha: 1 },
-        { duration: 1, autoAlpha: 0 },
-      ).to(hero1, { display: 'none' });
+    tl.fromTo(hero1, { autoAlpha: 1 }, { duration: 1, autoAlpha: 0 }).to(
+      hero1,
+      {
+        display: 'none',
+      },
+    );
+  };
+
+  useEffect(() => {
+    if (hideHero1) {
+      hideHero();
     }
   });
 
-  const toggleHero = () => {
-    setState({ clicked: true });
-  };
-
-  const functionsToToggleHero = () => {
+  const triggerToggleHero = () => {
     toggleHero();
-    triggerToggleHero();
   };
 
   return (
@@ -210,7 +216,7 @@ const Hero1 = ({ triggerToggleHero }) => {
         <Paragraph>{contentParagraph}</Paragraph>
         <ButtonCtaWrapper>
           <ButtonCta className="maincta">Main Cta</ButtonCta>
-          <ButtonCta className="secondcta" onClick={functionsToToggleHero}>
+          <ButtonCta className="secondcta" onClick={triggerToggleHero}>
             Second Cta
           </ButtonCta>
         </ButtonCtaWrapper>

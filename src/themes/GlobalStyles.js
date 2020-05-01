@@ -17,7 +17,7 @@ body{
     background-color: ${({ theme }) => theme.bgColor};
     color: ${({ theme }) => theme.fontColor};
     font-size: 1.6rem;
-    transition: background-color 1s, color 1s 1s;
+    transition: background-color 0.6s ease-in-out, color 1s 1s;
 }
 `;
 

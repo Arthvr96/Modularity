@@ -64,15 +64,15 @@ const HamburgerInner = styled.span`
 
 class HamburgerMenu extends React.Component {
   state = {
-    isOpen: 'false',
+    isOpen: false,
   };
 
   toggleHamburger = () => {
     const { isOpen } = this.state;
-    if (isOpen === 'false') {
-      this.setState({ isOpen: 'true' });
+    if (!isOpen) {
+      this.setState({ isOpen: true });
     } else {
-      this.setState({ isOpen: 'false' });
+      this.setState({ isOpen: false });
     }
   };
 

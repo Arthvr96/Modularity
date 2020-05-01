@@ -11,9 +11,7 @@ const NavWrapper = styled.nav`
   top: 0;
   display: block;
   width: 100vw;
-  transform: translateX(
-    ${({ isOpen }) => (isOpen === 'true' ? '0' : '-100vw')}
-  );
+  transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100vw')});
   transition: transform 1s 0.2s ease-in-out;
 
   ${media.desktop`
@@ -32,7 +30,7 @@ const NavWrapper = styled.nav`
     justify-content: center;
     height: ${function setHight({ isOpen }) {
       let heightMenu = 0;
-      if (isOpen === 'true') {
+      if (isOpen) {
         heightMenu = global.window.innerHeight;
       } else {
         heightMenu = global.window.innerHeight;

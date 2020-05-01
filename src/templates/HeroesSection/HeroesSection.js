@@ -4,22 +4,25 @@ import Hero2 from 'components/Hero2/Hero2';
 
 class HeroesSection extends React.Component {
   state = {
-    changeHero: false,
+    hideHero1: false,
   };
 
   toggleHero = () => {
-    this.setState({ changeHero: true });
+    this.setState({ hideHero1: true });
   };
 
   render() {
-    const { changeHero } = this.state;
+    const { hideHero1 } = this.state;
+    const { togglePartners } = this.props;
+    const { hideHero2 } = this.props;
+
     return (
       <div>
-        <Hero1 triggerToggleHero={this.toggleHero} />
+        <Hero1 toggleHero={this.toggleHero} hideHero1={hideHero1} />
         <Hero2
-          changeHero={
-            changeHero === true ? 'true' : 'false'
-          }
+          showHero2={hideHero1}
+          togglePartners={togglePartners}
+          hideHero2={hideHero2}
         />
       </div>
     );

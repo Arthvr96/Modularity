@@ -17,7 +17,7 @@ const HeaderWrapper = styled.header`
   width: 100vw;
   height: 5.6rem;
   background: ${({ theme }) => theme.bgColor};
-  transition: background-color 0.6s ease-in, color 0.6s ease-in;
+  transition: background-color 0.6s ease-in-out, color 0.6s ease-in;
 `;
 
 const Logo = styled.h1`

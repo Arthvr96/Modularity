@@ -24,11 +24,3 @@ export const themeLight = {
   hero1img: hero1light,
   hero2img: hero2light,
 };
-
-/**
-
-360 width - 50%
-
-576 width - 80%
-
- */
