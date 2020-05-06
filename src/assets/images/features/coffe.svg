@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="49px" height="48px" viewBox="0 0 49 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Elements/Icons--64px/bulb Copy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Layouts" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Features-Black-Three-1440" transform="translate(-362.000000, -416.000000)">
+            <g id="Feature-1">
+                <g id="Highlight-2" transform="translate(352.000000, 408.000000)">
+                    <g id="Elements/Icons--64px/coffee">
+                        <polygon id="Path" points="0 0 64 0 64 64 0 64"></polygon>
+                        <path d="M10.6666667,50.6666667 L53.3333333,50.6666667 L53.3333333,56 L10.6666667,56 L10.6666667,50.6666667 Z M53.3333333,8 L10.6666667,8 L10.6666667,34.6666667 C10.6666667,40.56 15.44,45.3333333 21.3333333,45.3333333 L37.3333333,45.3333333 C43.2266667,45.3333333 48,40.56 48,34.6666667 L48,26.6666667 L53.3333333,26.6666667 C56.2933333,26.6666667 58.6666667,24.2666667 58.6666667,21.3333333 L58.6666667,13.3333333 C58.6666667,10.3733333 56.2933333,8 53.3333333,8 Z M42.6666667,34.6666667 C42.6666667,37.6 40.2666667,40 37.3333333,40 L21.3333333,40 C18.4,40 16,37.6 16,34.6666667 L16,13.3333333 L42.6666667,13.3333333 L42.6666667,34.6666667 Z M53.3333333,21.3333333 L48,21.3333333 L48,13.3333333 L53.3333333,13.3333333 L53.3333333,21.3333333 Z" id="Shape" fill="#FFFFFF" fill-rule="evenodd"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

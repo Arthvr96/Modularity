@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import media from 'utilites/media';
-import { partnerInfo } from '../../date/partnersInfo';
+import { partnerInfo } from 'data/partnersInfo';
 
 const Wrapper = styled.section`
   padding-top: 5.6rem;

@@ -1,16 +1,18 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import 'normalize.css';
 import GlobalStyles from 'themes/GlobalStyles';
 import { themeDark, themeLight } from 'themes/theme';
 import Header from 'templates/Header/Header';
 import Partners from 'templates/Partners/Partners';
-import HeroesSection from '../../templates/HeroesSection/HeroesSection';
+import HeroesSection from 'templates/HeroesSection/HeroesSection';
+import Features from 'templates/Features/Features';
+import Team from 'templates/Team/Team';
 
 class Root extends React.Component {
   state = {
     theme: 'dark',
-    showPartners: false,
+    isVisible: false,
   };
 
   toggleTheme = () => {
@@ -23,16 +25,13 @@ class Root extends React.Component {
   };
 
   togglePartners = () => {
-    this.setState({ showPartners: true });
+    this.setState({ isVisible: true });
   };
 
   render() {
     const { theme } = this.state;
-    const { showPartners } = this.state;
-
-    const Wrapper = styled.div`
-      display: ${showPartners ? 'block' : 'none'};
-    `;
+    const { isVisible } = this.state;
+    // const dev = true;
 
     return (
       <ThemeProvider theme={theme === 'dark' ? themeDark : themeLight}>
@@ -41,11 +40,11 @@ class Root extends React.Component {
           <Header triggerToggleTheme={this.toggleTheme} />
           <HeroesSection
             togglePartners={this.togglePartners}
-            hideHero2={showPartners}
+            hideHero2={isVisible}
           />
-          <Wrapper>
-            <Partners showPartners={showPartners} />
-          </Wrapper>
+          <Partners showPartners={isVisible} />
+          <Features showFeatures={isVisible} />
+          <Team showTeam={isVisible} />
         </>
       </ThemeProvider>
     );
