@@ -39,6 +39,7 @@ class Root extends React.Component {
           <GlobalStyles />
           <Header triggerToggleTheme={this.toggleTheme} />
           <HeroesSection
+            themeChanged={theme}
             togglePartners={this.togglePartners}
             hideHero2={isVisible}
           />

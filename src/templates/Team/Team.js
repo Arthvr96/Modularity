@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import Persone from 'components/Persone/Persone';
 import teamInfo from 'data/teamInfo';
-import { fonts, lineHight } from 'utilites/typography';
 import media from 'utilites/media';
 
 const TeamWrapper = styled.section`
@@ -11,8 +10,8 @@ const TeamWrapper = styled.section`
   justify-content: center;
   width: 100%;
   height: 100vh;
-  background: ${({ theme }) => theme.bgColor};
-  color: ${({ theme }) => theme.fontColor};
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const ContentWrapper = styled.div`
@@ -26,15 +25,15 @@ const ContentWrapper = styled.div`
 const Header = styled.h3`
   width: 90%;
   margin: 3.2rem 0;
-  font-size: 2.4rem;
-  font-weight: ${fonts.Bolt};
-  line-height: ${lineHight.mobileH3}rem;
+  font-size: ${({ theme }) => theme.size.mobile.m};
+  line-height: ${({ theme }) => theme.lineHeight.s};
+  font-weight: ${({ theme }) => theme.fontWeight.bolt};
 
   ${media.tablet`
     width:80%;
     margin: 10.4rem 0 8rem 0;
-    font-size: 3.2rem;
-    line-height: ${lineHight.desktopH3}rem;
+    font-size: ${({ theme }) => theme.size.desktop.m};
+    line-height: ${({ theme }) => theme.lineHeight.m};
   `}
 `;
 
@@ -45,10 +44,8 @@ const Team = ({ showTeam }) => {
     gsap.set(team, { display: 'none', autoAlpha: 0 });
   };
 
-  const headerContent = `Team is a group of people who are
-    interdependent with respect to information, resources, and
-    skills and who seek to combine their efforts to achieve
-    a common goal.`;
+  const headerContent =
+    'Team is a group of people who are interdependent with respect to information, resources, and skills and who seek to combine their efforts to achieve a common goal.';
 
   const showTeamSection = () => {
     gsap.set(team, { display: 'flex' });

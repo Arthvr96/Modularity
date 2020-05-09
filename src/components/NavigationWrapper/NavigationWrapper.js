@@ -39,7 +39,7 @@ const NavWrapper = styled.nav`
     }}px;
     margin: 0;
     padding: 0;
-    background: ${({ theme }) => theme.bgColor};
+    background: ${({ theme }) => theme.colors.primary};
 
     ${media.desktop`
       position: static;
@@ -84,12 +84,12 @@ const NavWrapper = styled.nav`
 
   li a {
     margin-left: 0;
-    font-size: 2.4rem;
-    color: ${({ theme }) => theme.fontColor};
+    font-size: ${({ theme }) => theme.size.mobile.m};
+    color: ${({ theme }) => theme.colors.secondary};
     text-decoration: none;
     text-transform: uppercase;
     ${media.desktop`
-      font-size: 1.6rem;
+      font-size: ${({ theme }) => theme.size.desktop.xs};
       transition: letter-spacing 0.5s ease-in-out;
     `}
   }

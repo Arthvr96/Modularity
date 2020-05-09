@@ -15,11 +15,13 @@ class HeroesSection extends React.Component {
     const { hideHero1 } = this.state;
     const { togglePartners } = this.props;
     const { hideHero2 } = this.props;
+    const { themeChanged } = this.props;
 
     return (
       <div>
         <Hero1 toggleHero={this.toggleHero} hideHero1={hideHero1} />
         <Hero2
+          themeChanged={themeChanged}
           showHero2={hideHero1}
           togglePartners={togglePartners}
           hideHero2={hideHero2}

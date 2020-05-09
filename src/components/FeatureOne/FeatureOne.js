@@ -1,13 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { featureOne as data } from 'data/featuresInfo';
-import { fonts, lineHight } from 'utilites/typography';
 import media from 'utilites/media';
 
 function getName() {
-  const dark = data.imgDark;
-  const light = data.imgLight;
-  return ({ theme }) => (theme.info === 'dark' ? dark : light);
+  return ({ theme }) => (theme.isDark ? data.imgDark : data.imgLight);
 }
 
 const FeatureOneWrapper = styled.section`
@@ -17,7 +14,7 @@ const FeatureOneWrapper = styled.section`
   width: 100%;
   height: 100vh;
   min-height: 700px;
-  background: ${({ theme }) => theme.bgColor} url(${getName()}) no-repeat;
+  background: ${({ theme }) => theme.colors.primary} url(${getName()}) no-repeat;
   background-size: 100% 0%; /* height image will set after load page in useEffect call */
   transition: background-color 0.6s ease-in, background-image 0.4s 0.4s ease-in,
     color 0.6s ease-in;
@@ -26,7 +23,7 @@ const FeatureOneWrapper = styled.section`
     min-height: 0;
     background-position: 100% 100%;
     background-size: 50% 100%;
-    height:auto;
+    height:60vh;
     align-items: flex-start;
     justify-content: flex-start;
   `}
@@ -42,28 +39,28 @@ const Wrapper = styled.div`
 `;
 
 const Subtitle = styled.h4`
-  font-size: 1.6rem;
+  font-size: ${({ theme }) => theme.size.mobile.s};
   margin: 1.5rem 0;
-  font-weight: ${fonts.Bolt};
+  font-weight: ${({ theme }) => theme.fontWeight.bolt};
   text-transform: uppercase;
-  color: ${({ theme }) => theme.fontColor};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const Title = styled.h2`
   width: 40%;
   margin-bottom: 1rem;
-  font-size: 3.2rem;
-  font-weight: ${fonts.Bolt};
-  line-height: ${lineHight.mobileH2}rem;
-  color: ${({ theme }) => theme.fontColor};
+  font-size: ${({ theme }) => theme.size.mobile.l};
+  font-weight: ${({ theme }) => theme.fontWeight.bolt};
+  line-height: ${({ theme }) => theme.lineHeight.m};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const Description = styled.p`
   margin-bottom: 2.4rem;
-  font-size: 1.6rem;
-  font-weight: ${fonts.Normal};
-  line-height: ${lineHight.mobileP}rem;
-  color: ${({ theme }) => theme.fontColor};
+  font-size: ${({ theme }) => theme.size.mobile.s};
+  font-weight: ${({ theme }) => theme.fontWeight.normal};
+  line-height: ${({ theme }) => theme.lineHeight.xs};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const GridIconsWrapper = styled.div`
@@ -73,16 +70,16 @@ const GridIconsWrapper = styled.div`
   img {
     width: 4.8rem;
     height: 4.8rem;
-    filter: invert(${({ theme }) => theme.filter});
+    filter: invert(${({ theme }) => (theme.isDark ? '0%' : '100%')});
   }
 `;
 
 const DescriptionIcons = styled.p`
   margin-top: 1rem;
-  font-size: 1.6rem;
-  font-weight: ${fonts.Normal};
-  line-height: ${lineHight.mobileP}rem;
-  color: ${({ theme }) => theme.fontColor};
+  font-size: ${({ theme }) => theme.size.mobile.s};
+  font-weight: ${({ theme }) => theme.fontWeight.normal};
+  line-height: ${({ theme }) => theme.lineHeight.xs};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const FeatureOne = () => {
@@ -93,9 +90,7 @@ const FeatureOne = () => {
     if (window.innerWidth < 1024) {
       const heightWrapper = wrapper.clientHeight;
       const heightFeature1 = feature1.clientHeight;
-      feature1.style.backgroundSize = `100% ${
-        heightFeature1 - heightWrapper - 10
-      }px`;
+      feature1.style.backgroundSize = `100% ${heightFeature1 - heightWrapper - 10}px`;
     }
   }
 

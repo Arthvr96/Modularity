@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fonts, lineHight } from 'utilites/typography';
 import media from 'utilites/media';
 
 const PersoneWrapper = styled.div`
@@ -9,7 +8,7 @@ const PersoneWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 4rem;
-  color: ${({ theme }) => theme.fontColor};
+  color: ${({ theme }) => theme.colors.secondary};
   ${media.tablet`
     flex-direction: row;
     justify-content:space-between;
@@ -58,30 +57,31 @@ const Img = styled.img`
 const Name = styled.h2`
   width: 100%;
   margin-bottom: 1rem;
-  font-size: 3.2rem;
-  font-weight: ${fonts.Bolt};
-  line-height: ${lineHight.mobileH2}rem;
-  color: ${({ theme }) => theme.fontColor};
+
+  font-size: ${({ theme }) => theme.size.mobile.l};
+  line-height: ${({ theme }) => theme.lineHeight.m};
+  font-weight: ${({ theme }) => theme.fontWeight.bolt};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const Role = styled.h3`
   width: 100%;
   margin-bottom: 1.6rem;
-  font-size: 1.6rem;
-  font-weight: ${fonts.Bolt};
-  line-height: ${lineHight.mobileP}rem;
+  font-size: ${({ theme }) => theme.size.mobile.s};
+  line-height: ${({ theme }) => theme.lineHeight.xs};
+  font-weight: ${({ theme }) => theme.fontWeight.bolt};
   text-transform: uppercase;
-  color: ${({ theme }) => theme.fontColor};
+  color: ${({ theme }) => theme.colors.secondary};
   ${media.tablet`
     margin-bottom:4rem;
   `}
 `;
 
 const Description = styled.p`
-  font-size: 1.6rem;
-  font-weight: ${fonts.Normal};
-  line-height: ${lineHight.mobileP}rem;
-  color: ${({ theme }) => theme.fontColor};
+  font-size: ${({ theme }) => theme.size.mobile.s};
+  line-height: ${({ theme }) => theme.lineHeight.xs};
+  font-weight: ${({ theme }) => theme.fontWeight.normal};
+  color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const Persone = ({ img, name, role, description, i }) => {

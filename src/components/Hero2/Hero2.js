@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { fonts, lineHight } from 'utilites/typography';
 import arrow from 'assets/images/arrow-lighttheme.svg';
 import gsap from 'gsap';
 import media from 'utilites/media';
+import hero2dark from 'assets/images/hero2dark.jpg';
+import hero2light from 'assets/images/hero2light.jpg';
 
 const Wrapper = styled.section`
   display: flex;
@@ -11,26 +12,19 @@ const Wrapper = styled.section`
   align-items: flex-end;
   padding-top: 5rem;
   width: 100vw;
-  height: calc(100vh - 5.6rem);
   height: ${global.window.innerHeight}px;
-  background: url(${({ theme }) => theme.hero2img})
-    ${({ theme }) =>
-      theme.info === 'dark' ? '50% 6rem' : '0% 60px'} no-repeat;
-  background-position-x: ${({ theme }) =>
-    theme.info === 'dark' ? '0px' : '-500px'};
-  background-size: ${({ theme }) =>
-    theme.info === 'dark' ? '100% auto' : '1500px 100%'};
-  ${media.tablet`
-    background-position-x:25%;
-  `}
+  background-image: url(${hero2dark});
+  background-repeat: no-repeat;
+  background-size: 120% 100%;
+  background-position-x: 0;
+  background-position-y: 5.6rem;
+
   ${media.desktop`
-    background: url(${({ theme }) => theme.hero2img}) 0% 30% no-repeat;
-    background-position-x:0;
-    background-size: cover;
-  `}
-  ${media.desktopXL`
-  background: url(${({ theme }) => theme.hero2img}) 0% 40% no-repeat;
-  background-size: cover;
+  background-image: url(${hero2dark});
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position-x: 0;
+  background-position-y: 50%;
   `}
 `;
 
@@ -40,10 +34,10 @@ const ContentWrapper = styled.div`
 
 const SubTitle = styled.h4`
   margin-bottom: 1.6rem;
-  font-size: 1.6rem;
-  font-weight: ${fonts.Normal};
-  line-height: ${lineHight.mobileP}rem;
-  color: ${({ theme }) => theme.fontColor};
+  font-size: ${({ theme }) => theme.size.mobile.s};
+  font-weight: ${({ theme }) => theme.fontWeight.normal};
+  line-height: ${({ theme }) => theme.lineHeight.xs};
+  color: ${({ theme }) => theme.colors.secondary};
   text-transform: uppercase;
 `;
 
@@ -51,13 +45,13 @@ const Paragraph = styled.p`
   width: 45%;
   min-width: 170px;
   margin-bottom: 5.6rem;
-  font-size: 2.4rem;
-  font-weight: ${fonts.Bolt};
-  line-height: ${lineHight.mobileH3}rem;
-  color: ${({ theme }) => theme.fontColor};
+  font-size: ${({ theme }) => theme.size.mobile.m};
+  font-weight: ${({ theme }) => theme.fontWeight.bolt};
+  line-height: ${({ theme }) => theme.lineHeight.s};
+  color: ${({ theme }) => theme.colors.secondary};
   ${media.tablet`
-    font-size:3.2rem;
-    line-height: ${lineHight.desktopH3}rem;
+    font-size: ${({ theme }) => theme.size.desktop.m};
+    line-height: ${({ theme }) => theme.lineHeight.m};
   `}
   ${media.desktop`
     width:30rem;
@@ -75,7 +69,7 @@ const ExploreArrow = styled.span`
     position: relative;
     border: none;
     background-color: transparent;
-    color: ${({ theme }) => theme.fontColor};
+    color: ${({ theme }) => theme.colors.secondary};
     &::before {
       content: '';
       position: absolute;
@@ -86,7 +80,7 @@ const ExploreArrow = styled.span`
       height: 1.6rem;
       transform: translateY(-50%) rotate(90deg);
       background: url(${arrow}) 0 50% no-repeat;
-      filter: invert(${({ theme }) => (theme.info === 'dark' ? '100%' : '0%')});
+      filter: invert(${({ theme }) => (theme.isDark ? '100%' : '0%')});
     }
   }
 `;
@@ -94,7 +88,8 @@ const ExploreArrow = styled.span`
 const contentSubTtitle = 'In Marketing';
 const contentParagraph = 'Product is an object made available for consumer use';
 
-const Hero2 = ({ showHero2, togglePartners, hideHero2 }) => {
+const Hero2 = ({ showHero2, togglePartners, hideHero2, themeChanged }) => {
+  const [firstChange, setFirstChange] = useState(true);
   let hero2 = useRef(null);
 
   const setDefaultHero2 = () => {
@@ -117,6 +112,57 @@ const Hero2 = ({ showHero2, togglePartners, hideHero2 }) => {
     });
   };
 
+  const changeThemeToLight = () => {
+    const widthWindow = window.innerWidth;
+    const tl = gsap.timeline({
+      defaults: { ease: 'power3.inOut' },
+    });
+    tl.to(hero2, {
+      duration: 0.4,
+      autoAlpha: 0,
+    })
+      .set(hero2, {
+        backgroundImage: `url(${hero2light})`,
+        backgroundSize: `${widthWindow < 700 ? '300% 100%' : '120% 100%'}`,
+        backgroundPositionX: `${widthWindow < 700 ? '45%' : '20%'}`,
+        backgroundPositionY: `${widthWindow < 700 ? '5.6rem' : '5.6rem'}`,
+      })
+      .to(hero2, {
+        duration: 0.4,
+        autoAlpha: 1,
+      });
+  };
+
+  const changeThemeToDark = () => {
+    const widthWindow = window.innerWidth;
+    const tl = gsap.timeline({
+      defaults: { ease: 'power3.inOut' },
+    });
+    tl.to(hero2, {
+      duration: 0.4,
+      autoAlpha: 0,
+    })
+      .set(hero2, {
+        backgroundImage: `url(${hero2dark})`,
+        backgroundSize: `${widthWindow < 700 ? '120% 100%' : '120% auto'}`,
+        backgroundPositionX: `${widthWindow < 700 ? '0' : '0'}`,
+        backgroundPositionY: `${widthWindow < 700 ? '5.6rem' : '50%'}`,
+      })
+      .to(hero2, {
+        duration: 0.4,
+        autoAlpha: 1,
+      });
+  };
+
+  const changeTheme = () => {
+    if (themeChanged === 'light') {
+      setFirstChange(false);
+      changeThemeToLight();
+    } else if (themeChanged === 'dark' && !firstChange) {
+      changeThemeToDark();
+    }
+  };
+
   const hideHero = () => {
     const tl = gsap.timeline({
       defaults: { ease: 'power3.inOut' },
@@ -137,6 +183,9 @@ const Hero2 = ({ showHero2, togglePartners, hideHero2 }) => {
       setDefaultHero2();
     } else if (showHero2) {
       showHero();
+    }
+    if (showHero2) {
+      changeTheme();
     }
   });
 

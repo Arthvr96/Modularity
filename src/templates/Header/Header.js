@@ -16,7 +16,8 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
   width: 100vw;
   height: 5.6rem;
-  background: ${({ theme }) => theme.bgColor};
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.secondary};
   transition: background-color 0.6s ease-in-out, color 0.6s ease-in;
 `;
 
@@ -27,7 +28,7 @@ const Logo = styled.h1`
   margin-left: 1rem;
   text-indent: -9999rem;
   background: url(${logo});
-  filter: invert(${({ theme }) => theme.filter});
+  filter: invert(${({ theme }) => (theme.isDark ? '0%' : '100%')});
   transition: filter 0.6s ease-in;
   ${media.desktop`
   margin-left:10vw;
@@ -56,7 +57,7 @@ const ToggleThemeButton = styled.div`
     right: 0;
     bottom: 0;
     background-color: transparent;
-    border: 1px solid ${({ theme }) => theme.fgColor};
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
     transition: 0.4s;
   }
   .slider .before {
@@ -69,11 +70,11 @@ const ToggleThemeButton = styled.div`
     transition: 0.4s;
   }
   input:checked + .slider {
-    border: 1px solid ${({ theme }) => theme.fgColor};
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
     background-color: transparent;
   }
   input:checked + .slider .before {
-    background-color: ${({ theme }) => theme.fgColor};
+    background-color: ${({ theme }) => theme.colors.secondary};
     transform: translateX(14px);
   }
   .slider.round {

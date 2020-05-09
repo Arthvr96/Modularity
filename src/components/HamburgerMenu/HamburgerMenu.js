@@ -32,7 +32,7 @@ const HamburgerInner = styled.span`
   left: 0;
   top: 50%;
   background-color: ${({ isOpen, theme }) =>
-    isOpen === 'true' ? 'transparent' : theme.fgColor};
+    isOpen ? 'transparent' : theme.colors.secondary};
   transform: translateY(-50%);
   transition: background-color 0.2s ease-in;
 
@@ -45,20 +45,20 @@ const HamburgerInner = styled.span`
     display: block;
     width: 100%;
     height: 0.2rem;
-    background-color: ${({ theme }) => theme.fgColor};
+    background-color: ${({ theme }) => theme.colors.secondary};
     transition: background-color 0.2s ease-in, transform 0.3s 0.1s ease-in;
   }
 
   &::before {
     top: -5px;
-    transform: translateY(${({ isOpen }) => (isOpen === 'true' ? '5px' : '0')})
-      rotate(${({ isOpen }) => (isOpen === 'true' ? '45deg' : '0')});
+    transform: translateY(${({ isOpen }) => (isOpen ? '5px' : '0')})
+      rotate(${({ isOpen }) => (isOpen ? '45deg' : '0')});
   }
 
   &::after {
     top: 5px;
-    transform: translateY(${({ isOpen }) => (isOpen === 'true' ? '-5px' : '0')})
-      rotate(${({ isOpen }) => (isOpen === 'true' ? '-45deg' : '0')});
+    transform: translateY(${({ isOpen }) => (isOpen ? '-5px' : '0')})
+      rotate(${({ isOpen }) => (isOpen ? '-45deg' : '0')});
   }
 `;
 

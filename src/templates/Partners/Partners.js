@@ -18,8 +18,9 @@ const Header = styled.h2`
   margin: 0 0 3rem 0;
   padding-top: 4rem;
   font-size: 3.2rem;
+  font-size: ${({ theme }) => theme.size.mobile.l};
   text-align: center;
-  color: ${({ theme }) => theme.fontColor};
+  color: ${({ theme }) => theme.colors.secondary};
   transition: color 0.6s ease-in-out;
 `;
 
@@ -60,7 +61,7 @@ const ElementOfGrid = styled.div`
 
   border-bottom: 0;
   img {
-    filter: invert(${({ theme }) => (theme.info === 'light' ? '1' : '0')});
+    filter: invert(${({ theme }) => (theme.isDark ? '0%' : '100%')});
     transition: filter 0.7s ease-in;
   }
   &:nth-child(odd) {
@@ -69,26 +70,25 @@ const ElementOfGrid = styled.div`
 
   &:nth-last-child(1),
   &:nth-last-child(2) {
-    border-bottom: 1px solid #3f3f3f;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.dark};
   }
 
   ${media.desktop`
-    border:1px solid #3f3f3f;
+    border:1px solid ${({ theme }) => theme.colors.dark};
     border-top: 0;
     border-right: 0;
     &:nth-child(odd) {
-      border:1px solid #3f3f3f;
+      border:1px solid ${({ theme }) => theme.colors.dark};
       border-top: 0;
       border-right: 0;
     }
     &:nth-child(-n+4) {
-      border-top: 1px solid #3f3f3f;
+      border-top: 1px solid ${({ theme }) => theme.colors.dark};
     }
 
     &:last-child, &:nth-child(4n) {
-      border-right: 1px solid #3f3f3f;
+      border-right: 1px solid ${({ theme }) => theme.colors.dark};
     }
-
 
   `}
 `;
