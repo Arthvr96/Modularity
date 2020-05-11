@@ -1,8 +1,13 @@
 import React, { useRef, useEffect } from 'react';
+import styled from 'styled-components';
 import gsap from 'gsap';
 import FeatureOne from 'components/FeatureOne/FeatureOne';
 import FeatureTwo from 'components/FeatureTwo/FeatureTwo';
 import FeatureThree from 'components/FeatureThree/FeatureThree';
+
+const Wrapper = styled.div`
+  margin-top: 5rem;
+`;
 
 const Features = ({ showFeatures }) => {
   let features = useRef(null);
@@ -32,7 +37,7 @@ const Features = ({ showFeatures }) => {
   });
 
   return (
-    <div
+    <Wrapper
       ref={(el) => {
         features = el;
       }}
@@ -40,7 +45,7 @@ const Features = ({ showFeatures }) => {
       <FeatureOne />
       <FeatureTwo />
       <FeatureThree />
-    </div>
+    </Wrapper>
   );
 };
 

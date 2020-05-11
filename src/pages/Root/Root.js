@@ -8,6 +8,7 @@ import Partners from 'templates/Partners/Partners';
 import HeroesSection from 'templates/HeroesSection/HeroesSection';
 import Features from 'templates/Features/Features';
 import Team from 'templates/Team/Team';
+import About from 'templates/About/About';
 
 class Root extends React.Component {
   state = {
@@ -46,6 +47,7 @@ class Root extends React.Component {
           <Partners showPartners={isVisible} />
           <Features showFeatures={isVisible} />
           <Team showTeam={isVisible} />
+          <About showAbout={isVisible} />
         </>
       </ThemeProvider>
     );
