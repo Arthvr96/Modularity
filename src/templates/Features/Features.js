@@ -6,7 +6,9 @@ import FeatureTwo from 'components/FeatureTwo/FeatureTwo';
 import FeatureThree from 'components/FeatureThree/FeatureThree';
 
 const Wrapper = styled.div`
-  margin-top: 5rem;
+  padding-top: 5rem;
+  background-color: ${({ theme }) => theme.colors.primary};
+  transition: background-color 0.6s ease-in;
 `;
 
 const Features = ({ showFeatures }) => {
@@ -21,9 +23,7 @@ const Features = ({ showFeatures }) => {
     const tl = gsap.timeline({
       defaults: { ease: 'power3.inOut' },
     });
-    tl.to(features, {
-      duration: 1,
-      delay: 1,
+    tl.set(features, {
       autoAlpha: 1,
     });
   };

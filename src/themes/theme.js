@@ -38,12 +38,12 @@ export const themeDark = {
   },
   lineHeight: {
     xxs: '1.6rem',
-    xs: '2.4rem' /* mobileP,desktopP */,
-    s: '3.2rem' /* mobileH3,desktopP2 */,
-    m: '4.0rem' /* mobileH2 desktopH3 */,
-    l: '4.8rem' /* mobileH1 */,
-    xl: '5.6rem' /* desktopH2 */,
-    xxl: '6.4rem' /* desktopH1 */,
+    xs: '2.4rem',
+    s: '3.2rem',
+    m: '4.0rem',
+    l: '4.8rem',
+    xl: '5.6rem',
+    xxl: '6.4rem',
   },
   fontWeight: {
     normal: '400',

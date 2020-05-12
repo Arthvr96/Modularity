@@ -1,93 +1,119 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { featureTwo as data } from 'data/featuresInfo';
 import media from 'utilites/media';
 
-function getName() {
-  return ({ theme }) => (theme.isDark ? data.imgDark : data.imgLight);
-}
-
-const FeatureTwoWrapper = styled.section`
+const FeatureTwoSection = styled.section`
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  flex-direction: column;
   width: 100%;
-  height: 100vh;
-  min-height: 700px;
-  background: ${({ theme }) => theme.colors.primary} url(${getName()}) no-repeat;
-  background-size: 100% 0%; /* height image will set after load page in useEffect call */
-  transition: background-color 0.6s ease-in, background-image 0.4s 0.4s ease-in,
-    color 0.6s ease-in;
+  height: calc(100vh - 5.6rem);
+  min-height: 730px;
 
-  ${media.tabletXL`
-    min-height: 0;
-    background-position: 0% 100%;
-    background-size: 50% 100%;
-    height:60vh;
-    align-items: flex-start;
-    justify-content: flex-end;
+  ${media.desktop`
+    min-height:640px;
+    flex-direction:row;
+    height: 60vh;
   `}
 `;
 
-const Wrapper = styled.div`
-  margin-top: 100px;
-  width: 90%;
+const ImgPlaceHolder = styled.div`
+  width: 100%;
+  height: 100%;
+  background: url(${({ theme }) => (theme.isDark ? data.imgDark : data.imgLight)}) 0% 35%;
+  background-size: cover;
+  transition: background-image 0.6s ease-in;
 
-  ${media.tabletXL`
-    margin: 8.5rem 10vW 8.5rem 10vw;
-    width: calc(40% - 8.5rem);
+  ${media.desktop`
+    width:50%;
+  `}
+`;
+
+const FeatureThreeContent = styled.div`
+  margin: 0 auto;
+  width: 90%;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.secondary};
+  transition: background-color 0.6s ease-in, color 0.6s ease-in;
+
+  ${media.desktop`
+    display:flex;
+    align-items: center;
+    width:50%;
+  `}
+`;
+
+const FeatureTwoWrapper = styled.div`
+  ${media.desktop`
+    margin:0 10vw;
   `}
 `;
 
 const Subtitle = styled.h4`
+  margin-top: 2.4rem;
   font-size: ${({ theme }) => theme.size.mobile.s};
-  margin: 1.5rem 0;
   font-weight: ${({ theme }) => theme.fontWeight.bolt};
+  line-height: ${({ theme }) => theme.lineHeight.xs};
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const Title = styled.h2`
-  width: 70%;
-  margin-bottom: 1rem;
+  width: 75%;
+  margin: 0.8rem 0;
   font-size: ${({ theme }) => theme.size.mobile.l};
   font-weight: ${({ theme }) => theme.fontWeight.bolt};
   line-height: ${({ theme }) => theme.lineHeight.m};
   color: ${({ theme }) => theme.colors.secondary};
+
+  ${media.desktop`
+    font-size: ${({ theme }) => theme.size.desktop.xl};
+    line-height: ${({ theme }) => theme.lineHeight.xl};
+  `}
 `;
 
-const Description = styled.p`
-  margin-bottom: 2.4rem;
+const Paragraph = styled.p`
   font-size: ${({ theme }) => theme.size.mobile.s};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
   line-height: ${({ theme }) => theme.lineHeight.xs};
   color: ${({ theme }) => theme.colors.secondary};
 `;
 
-const GridIconsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 4rem;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 24px;
+  grid-row-gap: 24px;
+  align-items: center;
+  margin: 2.4rem 0 4rem 0;
+  position: relative;
+
+  ${media.desktop`
+    grid-column-gap: 16px;
+    margin: 4rem 0;
+  `}
 `;
 
 const GridHeader = styled.h4`
   font-size: ${({ theme }) => theme.size.mobile.l};
-  font-weight: ${({ theme }) => theme.fontWeight.bolt};
+  font-weight: ${({ theme }) => theme.fontWeight.nbolt};
+  line-height: ${({ theme }) => theme.lineHeight.m};
   color: ${({ theme }) => theme.colors.secondary};
-  position: relative;
+
   &::after {
     content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     display: block;
     width: 20%;
     height: 0.8rem;
-    margin-top: 1rem;
-    background: ${({ theme }) => theme.colors.secondary};
-    position: absolute;
+    background-color: ${({ theme }) => theme.colors.secondary};
   }
 `;
 
-const DescriptionGrid = styled.p`
-  margin-top: 2.5rem;
+const GridDescription = styled.p`
   font-size: ${({ theme }) => theme.size.mobile.s};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
   line-height: ${({ theme }) => theme.lineHeight.xs};
@@ -95,49 +121,23 @@ const DescriptionGrid = styled.p`
 `;
 
 const FeatureTwo = () => {
-  let wrapper = useRef(null);
-  let feature1 = useRef(null);
-
-  function setBgSize() {
-    if (window.innerWidth < 1024) {
-      const heightWrapper = wrapper.clientHeight;
-      const heightFeature1 = feature1.clientHeight;
-      feature1.style.backgroundSize = `100% ${heightFeature1 - heightWrapper - 10}px`;
-    }
-  }
-
-  useEffect(() => {
-    setBgSize();
-  });
-
   return (
-    <>
-      <FeatureTwoWrapper
-        ref={(el) => {
-          feature1 = el;
-        }}
-      >
-        <Wrapper
-          ref={(el) => {
-            wrapper = el;
-          }}
-        >
+    <FeatureTwoSection>
+      <ImgPlaceHolder alt={data.title} />
+      <FeatureThreeContent>
+        <FeatureTwoWrapper>
           <Subtitle>{data.subtitle}</Subtitle>
           <Title>{data.title}</Title>
-          <Description>{data.description}</Description>
-          <GridIconsWrapper>
-            <div>
-              <GridHeader>{data.header1}</GridHeader>
-              <DescriptionGrid>{data.descriptionHeader1}</DescriptionGrid>
-            </div>
-            <ul>
-              <GridHeader>{data.header2}</GridHeader>
-              <DescriptionGrid>{data.descriptionHeader2}</DescriptionGrid>
-            </ul>
-          </GridIconsWrapper>
-        </Wrapper>
-      </FeatureTwoWrapper>
-    </>
+          <Paragraph>{data.description}</Paragraph>
+          <Grid>
+            <GridHeader>{data.header1}</GridHeader>
+            <GridHeader>{data.header2}</GridHeader>
+            <GridDescription>{data.descriptionHeader1}</GridDescription>
+            <GridDescription>{data.descriptionHeader2}</GridDescription>
+          </Grid>
+        </FeatureTwoWrapper>
+      </FeatureThreeContent>
+    </FeatureTwoSection>
   );
 };
 

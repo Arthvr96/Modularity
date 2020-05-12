@@ -1,62 +1,79 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { featureThree as data } from 'data/featuresInfo';
 import media from 'utilites/media';
 
-function getName() {
-  return ({ theme }) => (theme.isDark ? data.imgDark : data.imgLight);
-}
-const FeatureThreeWrapper = styled.section`
+const FeatureThreeSection = styled.section`
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  flex-direction: column;
   width: 100%;
-  height: 100vh;
-  min-height: 700px;
-  background: ${({ theme }) => theme.colors.primary} url(${getName()}) no-repeat;
-  background-size: 100% 0%; /* height image will set after load page in useEffect call */
-  transition: background-color 0.6s ease-in, background-image 0.4s 0.4s ease-in,
-    color 0.6s ease-in;
+  height: calc(100vh - 5.6rem);
+  min-height: 730px;
 
-  ${media.tabletXL`
-    min-height: 0;
-    background-position: 100% 100%;
-    background-size: 50% 100%;
-    height:60vh;
-    align-items: flex-start;
-    justify-content: flex-start;
+  ${media.desktop`
+    min-height:640px;
+    flex-direction:row;
+    height: 60vh;
   `}
 `;
 
-const Wrapper = styled.div`
-  margin-top: 100px;
-  width: 90%;
+const ImgPlaceHolder = styled.div`
+  width: 100%;
+  height: 100%;
+  background: url(${({ theme }) => (theme.isDark ? data.imgDark : data.imgLight)}) 0% 35%;
+  background-size: cover;
+  transition: background-image 0.6s ease-in;
 
-  ${media.tabletXL`
-    margin: 8.5rem 0 8.5rem 10vw;
-    width: calc(40% - 8.5rem);
+  ${media.desktop`
+    order:5;
+    width:50%;
+  `}
+`;
+
+const FeatureThreeContent = styled.div`
+  margin: 0 auto;
+  width: 90%;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.secondary};
+  transition: background-color 0.6s ease-in, color 0.6s ease-in;
+
+  ${media.desktop`
+    display:flex;
+    align-items: center;
+    width:50%;
+  `}
+`;
+
+const FeatureThreeWrapper = styled.div`
+  ${media.desktop`
+    margin:0 10vw;
   `}
 `;
 
 const Subtitle = styled.h4`
+  margin-top: 2.4rem;
   font-size: ${({ theme }) => theme.size.mobile.s};
-  margin: 1.5rem 0;
   font-weight: ${({ theme }) => theme.fontWeight.bolt};
+  line-height: ${({ theme }) => theme.lineHeight.xs};
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const Title = styled.h2`
-  width: 90%;
-  margin-bottom: 1rem;
+  width: 75%;
+  margin: 0.8rem 0;
   font-size: ${({ theme }) => theme.size.mobile.l};
   font-weight: ${({ theme }) => theme.fontWeight.bolt};
   line-height: ${({ theme }) => theme.lineHeight.m};
   color: ${({ theme }) => theme.colors.secondary};
+
+  ${media.desktop`
+    font-size: ${({ theme }) => theme.size.desktop.xl};
+    line-height: ${({ theme }) => theme.lineHeight.xl};
+  `}
 `;
 
-const Description = styled.p`
-  margin-bottom: 4.4rem;
+const Paragraph = styled.p`
   font-size: ${({ theme }) => theme.size.mobile.s};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
   line-height: ${({ theme }) => theme.lineHeight.xs};
@@ -64,38 +81,10 @@ const Description = styled.p`
 `;
 
 const FormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 4rem;
-
-  label {
-    position: relative;
-  }
-
-  input {
-    width: 100%;
-    height: 4rem;
-    padding: 0 3rem;
-    border: none;
-    border-radius: 5px;
-    background: ${({ theme }) => (theme.isDark ? theme.colors.dark : theme.colors.light)};
-    color: ${({ theme }) => theme.colors.secondary};
-  }
-  button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 5%;
-    display: block;
-    width: 1.8rem;
-    height: 1.2rem;
-    border: none;
-    background: url(${data.formImg}) no-repeat;
-  }
+  margin-top: 2.4rem;
 `;
 
-const FormHeader = styled.h2`
-  width: 100%;
+const FormHeader = styled.h3`
   margin-bottom: 1.6rem;
   font-size: ${({ theme }) => theme.size.mobile.m};
   font-weight: ${({ theme }) => theme.fontWeight.bolt};
@@ -103,47 +92,36 @@ const FormHeader = styled.h2`
   color: ${({ theme }) => theme.colors.secondary};
 `;
 
+const FormInput = styled.input`
+  position: relative;
+  width: 100%;
+  padding: 0.8rem 1.6rem;
+  border: 0;
+  border-radius: 5px;
+  background: url(${data.formImg}) 97% 50% no-repeat;
+  background-color: ${({ theme }) =>
+    theme.isDark ? theme.colors.dark : theme.colors.light};
+  margin-bottom: 4rem;
+  color: ${({ theme }) => (theme.isDark ? theme.colors.lightes : theme.colors.dark)};
+  transition: background-color 0.6s ease-in, color 0.6s ease-in;
+`;
+
 const FeatureThree = () => {
-  let wrapper = useRef(null);
-  let feature1 = useRef(null);
-
-  function setBgSize() {
-    if (window.innerWidth < 1024) {
-      const heightWrapper = wrapper.clientHeight;
-      const heightFeature1 = feature1.clientHeight;
-      feature1.style.backgroundSize = `100% ${heightFeature1 - heightWrapper - 10}px`;
-    }
-  }
-
-  useEffect(() => {
-    setBgSize();
-  });
-
   return (
-    <>
-      <FeatureThreeWrapper
-        ref={(el) => {
-          feature1 = el;
-        }}
-      >
-        <Wrapper
-          ref={(el) => {
-            wrapper = el;
-          }}
-        >
+    <FeatureThreeSection>
+      <ImgPlaceHolder alt={data.title} />
+      <FeatureThreeContent>
+        <FeatureThreeWrapper>
           <Subtitle>{data.subtitle}</Subtitle>
           <Title>{data.title}</Title>
-          <Description>{data.description}</Description>
+          <Paragraph>{data.description}</Paragraph>
           <FormWrapper>
             <FormHeader>{data.formHeader}</FormHeader>
-            <label htmlFor="mail">
-              <input placeholder="*Your email address" id="mail" type="email" />
-              <button aria-label="submit mail" />
-            </label>
+            <FormInput type="mail" placeholder="*Your email address" />
           </FormWrapper>
-        </Wrapper>
-      </FeatureThreeWrapper>
-    </>
+        </FeatureThreeWrapper>
+      </FeatureThreeContent>
+    </FeatureThreeSection>
   );
 };
 
