@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import logo from 'assets/images/logo-darktheme.svg';
 import HamburgerMenu from 'components/HamburgerMenu/HamburgerMenu';
 import media from 'utilites/media';
+import gsap from 'gsap';
 
 const ZindexWrapper = styled.div`
   position: relative;
@@ -18,7 +19,7 @@ const HeaderWrapper = styled.header`
   height: 5.6rem;
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.secondary};
-  transition: background-color 0.6s ease-in-out, color 0.6s ease-in;
+  transition: background-color 0.6s ease-in, color 0.6s ease;
 `;
 
 const Logo = styled.h1`
@@ -92,36 +93,65 @@ const ToggleThemeButton = styled.div`
   `}
 `;
 
-const Header = ({ triggerToggleTheme }) => (
-  <ZindexWrapper>
-    <HeaderWrapper>
-      <a href="index.html">
-        <Logo>Modularity</Logo>
-      </a>
-      <ToggleThemeButton>
-        <label htmlFor="inputName" className="switch">
-          <input id="inputName" type="checkbox" />
-          <span
-            role="button"
-            tabIndex={0}
-            onClick={triggerToggleTheme}
-            onKeyPress={triggerToggleTheme}
-            className="slider round"
-          >
+const Header = ({ triggerToggleTheme }) => {
+  const [firstChanged, setFirstChanged] = useState(true);
+  let header = useRef(null);
+  let firstLoad = false;
+
+  const toggleTheme = () => {
+    firstLoad = true;
+    triggerToggleTheme();
+  };
+
+  const showHeader = () => {
+    setFirstChanged(false);
+    const tl = gsap.timeline({
+      defaults: { ease: 'power3.inOut' },
+    });
+    tl.fromTo(header, { autoAlpha: 0 }, { duration: 2.5, autoAlpha: 1 });
+  };
+
+  useEffect(() => {
+    if (!firstLoad && firstChanged) {
+      showHeader();
+    }
+  });
+
+  return (
+    <ZindexWrapper>
+      <HeaderWrapper
+        ref={(el) => {
+          header = el;
+        }}
+      >
+        <a href="index.html">
+          <Logo>Modularity</Logo>
+        </a>
+        <ToggleThemeButton>
+          <label htmlFor="inputName" className="switch">
+            <input id="inputName" type="checkbox" />
             <span
-              aria-label="Save"
               role="button"
               tabIndex={0}
               onClick={triggerToggleTheme}
               onKeyPress={triggerToggleTheme}
-              className="before"
-            />
-          </span>
-        </label>
-      </ToggleThemeButton>
-      <HamburgerMenu />
-    </HeaderWrapper>
-  </ZindexWrapper>
-);
+              className="slider round"
+            >
+              <span
+                aria-label="Save"
+                role="button"
+                tabIndex={0}
+                onClick={toggleTheme}
+                onKeyPress={triggerToggleTheme}
+                className="before"
+              />
+            </span>
+          </label>
+        </ToggleThemeButton>
+        <HamburgerMenu />
+      </HeaderWrapper>
+    </ZindexWrapper>
+  );
+};
 
 export default Header;
